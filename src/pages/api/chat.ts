@@ -27,7 +27,7 @@ const ask = async (req: NextApiRequest, res: NextApiResponse) => {
             });
 
             res.status(200).send({
-                content: response?.data?.choices[0]?.message?.content as string,
+                bot: response?.data?.choices[0]?.message?.content as string,
             });
 
         } catch (error) {
