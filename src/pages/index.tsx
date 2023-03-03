@@ -249,13 +249,13 @@ export default function Home() {
                             <h1 className={`
                             text-2xl font-bold text-center text-white
                             md:text-3xl lg:text-4xl xl:text-5xl md:leading-tight
-                        `}>Hi, I'm a ChatGPT Clone built with ChatGPT API</h1>
+                        `}>Hi, I&apos;m a ChatGPT Clone built with ChatGPT API</h1>
                             <p className={`
                             text-lg text-center text-white md:text-xl
                         `}>Please set your own OpenAi API Key below to start chatting with me</p>
                             <p className={`
                             text-sm text-center text-white
-                        `}>(Your API Key will be stored in your browser's local storage, not on our server)</p>
+                        `}>(Your API Key will be stored in your browser&apos;s local storage, not on our server)</p>
                             <div className={`
                             flex flex-col md:flex-row items-center justify-center gap-3
                         `}>
