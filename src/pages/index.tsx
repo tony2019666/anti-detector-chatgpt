@@ -32,7 +32,7 @@ export default function Home() {
         setApiKey(apiKeyFromLocalStorage || "");
     }, []);
 
-    const handleSave = async () => {
+    const handleSaveApiKey = async () => {
         if (apiKey === "") {
             setAlerts([{
                 id: Date.now(),
@@ -66,6 +66,16 @@ export default function Home() {
                 message: 'Your API key is invalid. Please enter a valid API key.',
             }])
         }
+    }
+
+    const handleClearApiKey = async () => {
+        setApiKey("");
+        localStorage.removeItem('apiKey');
+        setAlerts([{
+            id: Date.now(),
+            type: 'success',
+            message: 'API key cleared successfully',
+        }])
     }
 
     const handleDismiss = (id: any) => {
@@ -174,6 +184,7 @@ export default function Home() {
                 },
                 body: JSON.stringify({
                     prompt: inputValue,
+                    apiKey,
                 }),
             });
 
@@ -214,8 +225,8 @@ export default function Home() {
 
                 <div
                     className={`
-                flex flex-col items-center justify-center
-                w-full h-full overflow-y-auto p-4 gap-4
+                flex flex-col items-center justify-start
+                w-11/12 h-full overflow-y-auto py-4 gap-4
                 `}
                     id="chat_container"
                     ref={chatRef}
@@ -255,13 +266,15 @@ export default function Home() {
                                     onChange={(e) => setApiKey(e.target.value)}
                                 />
                                 <button
-                                    onClick={handleSave}
+                                    onClick={apiKey === '' ? handleSaveApiKey : handleClearApiKey}
                                     className={`
                                     w-20 px-4 py-2 text-lg text-blue-500 bg-white rounded-lg
                                     focus:outline-none shadow-lg font-bold hover:bg-blue-100
                                     transition duration-300 ease-in-out hover:shadow-xl focus:shadow-xl
                                 `}
-                                >Save
+                                >{
+                                    apiKey === '' ? 'Save' : 'Clear'
+                                }
                                 </button>
                             </div>
 
@@ -316,7 +329,7 @@ export default function Home() {
                     name="prompt"
                     rows={1}
                     cols={1}
-                    placeholder="Ask davinci..."
+                    placeholder="Ask ChatGPT..."
                     required
                     onChange={(e) => setInputValue(e.target.value)}
                     value={inputValue}

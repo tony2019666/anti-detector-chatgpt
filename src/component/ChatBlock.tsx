@@ -1,6 +1,8 @@
 import React from 'react';
 import bot from "../assets/bot.svg";
 import user from "../assets/user.svg";
+import Image from "next/image";
+
 interface ChatBlockProps {
     isAi: boolean;
     value: string;
@@ -10,15 +12,24 @@ interface ChatBlockProps {
 const ChatBlock: React.FC<ChatBlockProps> = ({isAi, value, uniqueId}) => {
 
     return (
-        <div className={`wrapper ${isAi && 'ai'}`}>
-            <div className="chat">
-                <div className="profile">
-                    <img
+        <div className={`
+            ${isAi ? "bg-white" : "bg-gray-300"} w-full rounded-lg p-3
+        `}>
+            <div className="
+                flex flex-row items-start justify-start
+            ">
+                <div className={`
+                    mr-2 w-12 h-11 rounded-full flex items-center justify-center
+                    ${isAi ? "bg-gray-300" : "border-white border-2"}
+                    `}>
+                    <Image
                         src={isAi ? bot : user}
                         alt={isAi ? 'bot' : 'user'}
+                        width={30}
+                        height={30}
                     />
                 </div>
-                <div className="message" id={uniqueId}>
+                <div className="p-3 w-full test-gray-700" id={uniqueId}>
                     {value}
                 </div>
             </div>
