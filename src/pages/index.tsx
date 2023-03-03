@@ -116,7 +116,7 @@ export default function Home() {
             } else {
                 clearInterval(interval);
             }
-        }, 20);
+        }, 0);
     };
 
     const handleUid = () => {
