@@ -21,6 +21,7 @@ export default function Home() {
         uniqueId: string;
     }[]>([]);
     const [apiKey, setApiKey] = useState<string>("");
+    const [apiKeyInput, setApiKeyInput] = useState<string>("");
     const [editKey, setEditKey] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState<string>('');
     const [uniqueId, setUniqueId] = useState<string>('');
@@ -29,11 +30,12 @@ export default function Home() {
 
     useEffect(() => {
         const apiKeyFromLocalStorage = typeof window !== 'undefined' && localStorage.getItem('apiKey');
+        setApiKeyInput(apiKeyFromLocalStorage || "");
         setApiKey(apiKeyFromLocalStorage || "");
     }, []);
 
     const handleSaveApiKey = async () => {
-        if (apiKey === "") {
+        if (apiKeyInput === "") {
             setAlerts([{
                 id: Date.now(),
                 type: 'error',
@@ -42,7 +44,7 @@ export default function Home() {
         }
 
         try {
-            const response = await fetch(`/api/validate?apiKey=${apiKey}`, {
+            const response = await fetch(`/api/validate?apiKey=${apiKeyInput}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +54,8 @@ export default function Home() {
             console.log(response)
 
             if (response.status === 200) {
-                localStorage.setItem('apiKey', apiKey);
+                localStorage.setItem('apiKey', apiKeyInput);
+                setApiKey(apiKeyInput);
                 setAlerts([{
                     id: Date.now(),
                     type: 'success',
@@ -70,6 +73,7 @@ export default function Home() {
 
     const handleClearApiKey = async () => {
         setApiKey("");
+        setApiKeyInput("");
         localStorage.removeItem('apiKey');
         setAlerts([{
             id: Date.now(),
@@ -262,8 +266,8 @@ export default function Home() {
                                 transition duration-300 ease-in-out hover:shadow-xl focus:shadow-xl hover:scale-105
                                     `} type="text" name="api_key" id="api_key"
                                     placeholder="OpenAi API Key"
-                                    value={apiKey}
-                                    onChange={(e) => setApiKey(e.target.value)}
+                                    value={apiKeyInput}
+                                    onChange={(e) => setApiKeyInput(e.target.value)}
                                 />
                                 <button
                                     onClick={apiKey === '' ? handleSaveApiKey : handleClearApiKey}
