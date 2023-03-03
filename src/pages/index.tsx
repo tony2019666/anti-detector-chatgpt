@@ -26,6 +26,7 @@ export default function Home() {
     const [inputValue, setInputValue] = useState<string>('');
     const [uniqueId, setUniqueId] = useState<string>('');
     const [alerts, setAlerts] = useState<Alert[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
     const chatRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -35,6 +36,7 @@ export default function Home() {
     }, []);
 
     const handleSaveApiKey = async () => {
+        setLoading(true);
         if (apiKeyInput === "") {
             setAlerts([{
                 id: Date.now(),
@@ -62,12 +64,16 @@ export default function Home() {
                     message: 'API key saved successfully',
                 }])
             }
+
+            setLoading(false);
         } catch (e) {
             setAlerts([{
                 id: Date.now(),
                 type: 'error',
                 message: 'Your API key is invalid. Please enter a valid API key.',
             }])
+
+            setLoading(false);
         }
     }
 
@@ -272,12 +278,19 @@ export default function Home() {
                                 <button
                                     onClick={apiKey === '' ? handleSaveApiKey : handleClearApiKey}
                                     className={`
-                                    w-20 px-4 py-2 text-lg text-blue-500 bg-white rounded-lg
+                                    w-20 px-4 py-2 text-lg text-blue-500 bg-white rounded-lg flex items-center justify-center
                                     focus:outline-none shadow-lg font-bold hover:bg-blue-100
                                     transition duration-300 ease-in-out hover:shadow-xl focus:shadow-xl
                                 `}
                                 >{
-                                    apiKey === '' ? 'Save' : 'Clear'
+                                    apiKey === '' ?
+                                        loading ?
+                                            <svg className="animate-spin h-6 w-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                            </svg>
+                                            : 'Save'
+                                        : 'Clear'
                                 }
                                 </button>
                             </div>
