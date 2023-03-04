@@ -24,6 +24,7 @@ export default function Home() {
     const [apiKeyInput, setApiKeyInput] = useState<string>("");
     const [editKey, setEditKey] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState<string>('');
+    const [wordLimit, setWordLimit] = useState<number>(100);
     const [uniqueId, setUniqueId] = useState<string>('');
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -189,6 +190,7 @@ export default function Home() {
                 body: JSON.stringify({
                     prompt: inputValue,
                     apiKey,
+                    wordLimit,
                 }),
             });
 
@@ -354,6 +356,22 @@ export default function Home() {
                     onChange={(e) => setInputValue(e.target.value)}
                     value={inputValue}
                 ></textarea>
+                    <select
+                        name="wordLimit"
+                        id="wordLimit"
+                        className={`w-40 px-4 py-2 text-lg text-gray-900 bg-white rounded-xl
+                        focus:outline-none mr-3 shadow-lg border-2 border-blue-400
+                        transition-all duration-300 ease-in-out
+                        `}
+                        onChange={(e) => setWordLimit(parseInt(e.target.value))}
+                        value={wordLimit}
+                    >
+                        <option value="100">100 Words</option>
+                        <option value="250">250 Words</option>
+                        <option value="500">500 Words</option>
+                        <option value="750">750 Words</option>
+                        <option value="1000">1000 Words</option>
+                    </select>
                     <button
                         className={`
                     w-12 h-12 bg-blue-400 rounded-xl shadow-lg
