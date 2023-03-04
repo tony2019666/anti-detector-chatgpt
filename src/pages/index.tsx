@@ -107,16 +107,18 @@ export default function Home() {
     };
 
     const handleTypeResponse = (element: HTMLElement, text: string) => {
-        let index = 0;
+        // let index = 0;
+        //
+        // let interval = setInterval(() => {
+        //     if (index < text.length) {
+        //         element.innerHTML += text.charAt(index);
+        //         index++;
+        //     } else {
+        //         clearInterval(interval);
+        //     }
+        // }, 0);
 
-        let interval = setInterval(() => {
-            if (index < text.length) {
-                element.innerHTML += text.charAt(index);
-                index++;
-            } else {
-                clearInterval(interval);
-            }
-        }, 0);
+        element.innerHTML = text;
     };
 
     const handleUid = () => {
@@ -168,12 +170,6 @@ export default function Home() {
         };
 
         setChatData([...chatData, newChatMan, newChatBot]);
-
-        // to focus scroll to the bottom
-        chatRef.current?.scrollTo({
-            top: chatRef.current?.scrollHeight,
-            behavior: 'smooth',
-        });
     };
 
     useEffect(() => {
@@ -217,6 +213,15 @@ export default function Home() {
             fetchChat().then();
         }
     }, [chatData, uniqueId]);
+
+    useEffect(() => {
+        if (chatRef.current) {
+            chatRef.current.scrollTo({
+                top: chatRef.current.scrollHeight,
+                behavior: 'smooth',
+            });
+        }
+    }, [handleTypeResponse, chatData]);
 
     return (
         <>
@@ -396,7 +401,6 @@ export default function Home() {
                             </div>
                         ))}
                     </div>
-
                 }
             </main>
         </>
