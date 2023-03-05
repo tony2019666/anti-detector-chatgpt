@@ -367,9 +367,9 @@ export default function Home() {
                     >
                         <option value="100">100 Words</option>
                         <option value="250">250 Words</option>
-                        <option value="500">500 Words</option>
-                        <option value="750">750 Words</option>
-                        <option value="1000">1000 Words</option>
+                        <option disabled={true} value="500">500 Words</option>
+                        <option disabled={true} value="750">750 Words</option>
+                        <option disabled={true} value="1000">1000 Words</option>
                     </select>
                     <button
                         className={`
