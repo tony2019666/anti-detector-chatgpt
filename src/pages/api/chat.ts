@@ -30,7 +30,7 @@ const ask = async (req: NextApiRequest, res: NextApiResponse) => {
                 temp = 1.5
                 fp = 1.2
             } else if (500 < wordLimit && wordLimit <= 750) {
-                temp = 1.2
+                temp = 1.1
                 fp = 0.6
             } else if (750 < wordLimit && wordLimit <= 1000) {
                 temp = 1.1

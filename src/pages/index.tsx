@@ -313,13 +313,13 @@ export default function Home() {
                             <p className={`
                             text-lg text-center text-white md:text-xl
                         `}>
-                                Github Repo: <Link href="https://github.com/CopsGit/chatgpt-api-clone"
+                                Github Repo: <Link href="https://github.com/CopsGit/anti-detector-chatgpt"
                                                     target="_blank"
                                                     rel="noreferrer"
                                                     className={`
                                                 text-white hover:text-blue-300 transition duration-300 ease-in-out
                                                 `}
-                            >chatgpt-api-clone</Link>
+                            >anti-detector-chatgpt</Link>
                             </p>
                         </div>
                     }
@@ -367,8 +367,8 @@ export default function Home() {
                     >
                         <option value="100">100 Words</option>
                         <option value="250">250 Words</option>
-                        <option disabled={true} value="500">500 Words</option>
-                        <option disabled={true} value="750">750 Words</option>
+                        <option value="500">500 Words</option>
+                        <option value="750">750 Words</option>
                         <option disabled={true} value="1000">1000 Words</option>
                     </select>
                     <button

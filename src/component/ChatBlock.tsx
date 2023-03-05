@@ -29,7 +29,7 @@ const ChatBlock: React.FC<ChatBlockProps> = ({isAi, value, uniqueId}) => {
                         height={30}
                     />
                 </div>
-                <div className="p-3 w-full test-gray-700" id={uniqueId}>
+                <div className="p-3 w-full test-gray-700 whitespace-pre-wrap" id={uniqueId}>
                     {value}
                 </div>
             </div>
