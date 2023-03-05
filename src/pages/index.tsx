@@ -22,7 +22,6 @@ export default function Home() {
     }[]>([]);
     const [apiKey, setApiKey] = useState<string>("");
     const [apiKeyInput, setApiKeyInput] = useState<string>("");
-    const [editKey, setEditKey] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState<string>('');
     const [wordLimit, setWordLimit] = useState<number>(100);
     const [uniqueId, setUniqueId] = useState<string>('');
