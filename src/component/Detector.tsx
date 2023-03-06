@@ -4,6 +4,7 @@ interface DetectorProps {
     content: string;
 }
 
+
 const Detector: React.FC<DetectorProps> = ({content}) => {
 
     const [result, setResult] = useState<any>({});
@@ -11,7 +12,6 @@ const Detector: React.FC<DetectorProps> = ({content}) => {
     const detect = async () => {
         try{
             const token = process.env.NEXT_PUBLIC_SESS_TOKEN;
-            console.log(token)
             const response = await fetch('https://api.openai.com/v1/completions', {
                 method: 'POST',
                 headers: {
@@ -46,10 +46,15 @@ const Detector: React.FC<DetectorProps> = ({content}) => {
                 const json = await response.json();
                 const choices = json.choices[0];
                 const logprobs = choices.logprobs.top_logprobs[0];
-                const probs = Object.fromEntries(Object.entries(logprobs).map(([key, value]) => [key, 100 * Math.exp(Number(value))]));
+                const probs = Object.fromEntries(
+                    Object.entries(logprobs).map(([key, value]) => [
+                        key,
+                        100 * Math.exp(value as number),
+                    ])
+                );
 
                 // Classify the result
-                const classMax = [10, 45, 90, 98, 99];
+                const classMax = [10, 45, 60, 80, 95];
                 const possibleClasses = [
                     'very unlikely',
                     'unlikely',
