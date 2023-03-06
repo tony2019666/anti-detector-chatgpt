@@ -93,7 +93,7 @@ const Detector: React.FC<DetectorProps> = ({content}) => {
             <p className={`
                 text-lg font-bold mt-3
                 ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}
-            `}>AI-Generated Probability: {result['AI-Generated Probability'].toFixed(2)}%</p>
+            `}>AI-Generated Probability: {result['AI-Generated Probability']?.toFixed(2)}%</p>
         </div>
     );
 };
